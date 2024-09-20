@@ -1,7 +1,7 @@
-
 mod framebuffer;
 mod ray_intersect;
 mod sphere;
+mod cube; // Importamos el módulo del cubo
 mod color;
 mod camera;
 mod light;
@@ -15,6 +15,7 @@ use std::f32::consts::PI;
 use crate::color::Color;
 use crate::ray_intersect::{Intersect, RayIntersect};
 use crate::sphere::Sphere;
+use crate::cube::Cube; 
 use crate::framebuffer::Framebuffer;
 use crate::camera::Camera;
 use crate::light::Light;
@@ -63,7 +64,7 @@ fn refract(incident: &Vec3, normal: &Vec3, eta_t: f32) -> Vec3 {
 fn cast_shadow(
     intersect: &Intersect,
     light: &Light,
-    objects: &[Sphere],
+    objects: &[Object],
 ) -> f32 {
     let light_dir = (light.position - intersect.point).normalize();
     let light_distance = (light.position - intersect.point).magnitude();
@@ -72,7 +73,10 @@ fn cast_shadow(
     let mut shadow_intensity = 0.0;
 
     for object in objects {
-        let shadow_intersect = object.ray_intersect(&shadow_ray_origin, &light_dir);
+        let shadow_intersect = match object {
+            Object::Sphere(sphere) => sphere.ray_intersect(&shadow_ray_origin, &light_dir),
+            Object::Cube(cube) => cube.ray_intersect(&shadow_ray_origin, &light_dir),
+        };
         if shadow_intersect.is_intersecting && shadow_intersect.distance < light_distance {
             let distance_ratio = shadow_intersect.distance / light_distance;
             shadow_intensity = 1.0 - distance_ratio.powf(2.0).min(1.0);
@@ -83,10 +87,15 @@ fn cast_shadow(
     shadow_intensity
 }
 
+enum Object {
+    Sphere(Sphere),
+    Cube(Cube),
+}
+
 pub fn cast_ray(
     ray_origin: &Vec3,
     ray_direction: &Vec3,
-    objects: &[Sphere],
+    objects: &[Object],
     light: &Light,
     depth: u32,
 ) -> Color {
@@ -98,7 +107,10 @@ pub fn cast_ray(
     let mut zbuffer = f32::INFINITY;
 
     for object in objects {
-        let i = object.ray_intersect(ray_origin, ray_direction);
+        let i = match object {
+            Object::Sphere(sphere) => sphere.ray_intersect(ray_origin, ray_direction),
+            Object::Cube(cube) => cube.ray_intersect(ray_origin, ray_direction),
+        };
         if i.is_intersecting && i.distance < zbuffer {
             zbuffer = i.distance;
             intersect = i;
@@ -130,7 +142,6 @@ pub fn cast_ray(
         reflect_color = cast_ray(&reflect_origin, &reflect_dir, objects, light, depth + 1);
     }
 
-
     let mut refract_color = Color::black();
     let transparency = intersect.material.albedo[3];
     if transparency > 0.0 {
@@ -142,7 +153,7 @@ pub fn cast_ray(
     (diffuse + specular) * (1.0 - reflectivity - transparency) + (reflect_color * reflectivity) + (refract_color * transparency)
 }
 
-pub fn render(framebuffer: &mut Framebuffer, objects: &[Sphere], camera: &Camera, light: &Light) {
+pub fn render(framebuffer: &mut Framebuffer, objects: &[Object], camera: &Camera, light: &Light) {
     let width = framebuffer.width as f32;
     let height = framebuffer.height as f32;
     let aspect_ratio = width / height;
@@ -158,7 +169,6 @@ pub fn render(framebuffer: &mut Framebuffer, objects: &[Sphere], camera: &Camera
             let screen_y = screen_y * perspective_scale;
 
             let ray_direction = normalize(&Vec3::new(screen_x, screen_y, -1.0));
-
             let rotated_direction = camera.base_change(&ray_direction);
 
             let pixel_color = cast_ray(&camera.eye, &rotated_direction, objects, light, 0);
@@ -206,28 +216,35 @@ fn main() {
         0.3,
     );
 
+    let cube_material = Material::new(
+        Color::new(0, 0, 255), 
+        1.0,
+        [0.9, 0.1, 0.0, 0.0],
+        0.0,
+    );
+
     let objects = [
-        Sphere { center: Vec3::new(0.0, 0.0, 0.0), radius: 1.0, material: rubber },
-        Sphere { center: Vec3::new(-1.0, -1.0, 1.5), radius: 0.5, material: ivory },
-        Sphere { center: Vec3::new(-0.3, 0.3, 1.5), radius: 0.3, material: glass },
+        Object::Sphere(Sphere { center: Vec3::new(0.0, 0.0, 0.0), radius: 1.0, material: rubber }),
+        Object::Sphere(Sphere { center: Vec3::new(-1.0, -1.0, 1.5), radius: 0.5, material: ivory }),
+        Object::Sphere(Sphere { center: Vec3::new(-0.3, 0.3, 1.5), radius: 0.3, material: glass }),
+        Object::Cube(Cube { center: Vec3::new(2.0, 0.0, 0.0), size: 1.0, material: cube_material }), 
     ];
 
     let mut camera = Camera::new(
-        Vec3::new(0.0, 0.0, 5.0),
+        Vec3::new(5.0, 0.0, 0.0),
         Vec3::new(0.0, 0.0, 0.0),
         Vec3::new(0.0, 1.0, 0.0),
     );
 
-    let light = Light::new(
-        Vec3::new(1.0, -1.0, 5.0),
-        Color::new(255, 255, 255),
-        1.0
-    );
+    let light = Light {
+        position: Vec3::new(0.0, 0.0, 20.0),
+        intensity: 1.5,
+        color: Color::new(255, 255, 255),
+    };
 
-    let rotation_speed = PI/10.0;
+    let rotation_speed = 0.1;
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
-
         if window.is_key_down(Key::Left) {
             camera.orbit(rotation_speed, 0.0); 
         }
@@ -246,10 +263,7 @@ fn main() {
 
         render(&mut framebuffer, &objects, &camera, &light);
 
-        window
-            .update_with_buffer(&framebuffer.buffer, framebuffer_width, framebuffer_height)
-            .unwrap();
-
+        window.update_with_buffer(&framebuffer.buffer, framebuffer.width, framebuffer.height).unwrap();
         std::thread::sleep(frame_delay);
     }
-}   
+}
