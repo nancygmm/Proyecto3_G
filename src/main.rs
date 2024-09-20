@@ -1,7 +1,7 @@
 mod framebuffer;
 mod ray_intersect;
 mod sphere;
-mod cube; // Importamos el módulo del cubo
+mod cube; 
 mod color;
 mod camera;
 mod light;
