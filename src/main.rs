@@ -205,7 +205,7 @@ fn main() {
     );
 
     let objects = [
-        Object::Cube(Cube { center: Vec3::new(0.0, 5.0, 0.0), size: 1.0, material: pale_yellow }), 
+        Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow }), 
         Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }),
     ];
 
