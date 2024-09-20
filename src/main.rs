@@ -1,6 +1,5 @@
 mod framebuffer;
 mod ray_intersect;
-mod sphere;
 mod cube; 
 mod color;
 mod camera;
@@ -14,7 +13,6 @@ use std::f32::consts::PI;
 
 use crate::color::Color;
 use crate::ray_intersect::{Intersect, RayIntersect};
-use crate::sphere::Sphere;
 use crate::cube::Cube; 
 use crate::framebuffer::Framebuffer;
 use crate::camera::Camera;
@@ -74,7 +72,6 @@ fn cast_shadow(
 
     for object in objects {
         let shadow_intersect = match object {
-            Object::Sphere(sphere) => sphere.ray_intersect(&shadow_ray_origin, &light_dir),
             Object::Cube(cube) => cube.ray_intersect(&shadow_ray_origin, &light_dir),
         };
         if shadow_intersect.is_intersecting && shadow_intersect.distance < light_distance {
@@ -88,7 +85,6 @@ fn cast_shadow(
 }
 
 enum Object {
-    Sphere(Sphere),
     Cube(Cube),
 }
 
@@ -108,7 +104,6 @@ pub fn cast_ray(
 
     for object in objects {
         let i = match object {
-            Object::Sphere(sphere) => sphere.ray_intersect(ray_origin, ray_direction),
             Object::Cube(cube) => cube.ray_intersect(ray_origin, ray_direction),
         };
         if i.is_intersecting && i.distance < zbuffer {
@@ -195,28 +190,14 @@ fn main() {
         WindowOptions::default(),
     ).unwrap();
 
-    let rubber = Material::new(
-        Color::new(80, 0, 0),
+    let pale_yellow = Material::new(
+        Color::new(255, 255, 153), 
         1.0,
         [0.9, 0.1, 0.0, 0.0],
         0.0,
     );
 
-    let ivory = Material::new(
-        Color::new(100, 100, 80),
-        50.0,
-        [0.6, 0.3, 0.6, 0.0],
-        0.0,
-    );
-
-    let glass = Material::new(
-        Color::new(255, 255, 255),
-        1425.0,
-        [0.0, 10.0, 0.5, 0.5],
-        0.3,
-    );
-
-    let cube_material = Material::new(
+    let blue_cube = Material::new(
         Color::new(0, 0, 255), 
         1.0,
         [0.9, 0.1, 0.0, 0.0],
@@ -224,10 +205,8 @@ fn main() {
     );
 
     let objects = [
-        Object::Sphere(Sphere { center: Vec3::new(0.0, 0.0, 0.0), radius: 1.0, material: rubber }),
-        Object::Sphere(Sphere { center: Vec3::new(-1.0, -1.0, 1.5), radius: 0.5, material: ivory }),
-        Object::Sphere(Sphere { center: Vec3::new(-0.3, 0.3, 1.5), radius: 0.3, material: glass }),
-        Object::Cube(Cube { center: Vec3::new(2.0, 0.0, 0.0), size: 1.0, material: cube_material }), 
+        Object::Cube(Cube { center: Vec3::new(0.0, 5.0, 0.0), size: 1.0, material: pale_yellow }), 
+        Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }),
     ];
 
     let mut camera = Camera::new(
