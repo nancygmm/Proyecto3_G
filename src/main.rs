@@ -210,9 +210,9 @@ fn main() {
     ];
 
     let mut camera = Camera::new(
-        Vec3::new(5.0, 0.0, 0.0),
-        Vec3::new(0.0, 0.0, 0.0),
-        Vec3::new(0.0, 1.0, 0.0),
+        Vec3::new(0.0, 3.0, -3.0), 
+        Vec3::new(0.0, 3.0, 0.0),  
+        Vec3::new(0.0, 1.0, 0.0),  
     );
 
     let light = Light {
