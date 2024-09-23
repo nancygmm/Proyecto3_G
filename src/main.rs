@@ -231,7 +231,7 @@ fn main() {
         let x = radius * angle.cos();
         let z = radius * angle.sin();
         objects[0] = Object::Cube(Cube { 
-            center: Vec3::new(x, 10.0, z),  
+            center: Vec3::new(10.0, x, z),  
             size: 1.0, 
             material: pale_yellow 
         });
