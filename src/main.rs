@@ -1,22 +1,21 @@
 mod framebuffer;
 mod ray_intersect;
-mod cube; 
+mod cube;
 mod color;
 mod camera;
 mod light;
 mod material;
 
-use minifb::{ Window, WindowOptions, Key };
+use minifb::{Window, WindowOptions, Key};
 use nalgebra_glm::{Vec3, normalize};
 use std::time::Duration;
 use std::f32::consts::PI;
 
 use crate::color::Color;
 use crate::ray_intersect::{Intersect, RayIntersect};
-use crate::cube::Cube; 
+use crate::cube::Cube;
 use crate::framebuffer::Framebuffer;
 use crate::camera::Camera;
-use crate::light::Light;
 use crate::material::Material;
 
 const ORIGIN_BIAS: f32 = 1e-4;
@@ -35,44 +34,20 @@ fn reflect(incident: &Vec3, normal: &Vec3) -> Vec3 {
     incident - 2.0 * incident.dot(normal) * normal
 }
 
-fn refract(incident: &Vec3, normal: &Vec3, eta_t: f32) -> Vec3 {
-    let cosi = -incident.dot(normal).max(-1.0).min(1.0);
-    
-    let (n_cosi, eta, n_normal);
-
-    if cosi < 0.0 {
-        n_cosi = -cosi;
-        eta = 1.0 / eta_t;
-        n_normal = -normal;
-    } else {
-        n_cosi = cosi;
-        eta = eta_t;
-        n_normal = *normal;
-    }
-    
-    let k = 1.0 - eta * eta * (1.0 - n_cosi * n_cosi);
-    
-    if k < 0.0 {
-        reflect(incident, &n_normal)
-    } else {
-        eta * incident + (eta * n_cosi - k.sqrt()) * n_normal
-    }
-}
-
 fn cast_shadow(
     intersect: &Intersect,
-    light: &Light,
+    light_position: &Vec3,
     objects: &[Object],
 ) -> f32 {
-    let light_dir = (light.position - intersect.point).normalize();
-    let light_distance = (light.position - intersect.point).magnitude();
+    let light_dir = (light_position - intersect.point).normalize();
+    let light_distance = (light_position - intersect.point).magnitude();
 
     let shadow_ray_origin = offset_origin(intersect, &light_dir);
     let mut shadow_intensity = 0.0;
 
     for object in objects {
         let shadow_intersect = match object {
-            Object::Cube(cube) => cube.ray_intersect(&shadow_ray_origin, &light_dir),
+            Object::Cube(cube, _) => cube.ray_intersect(&shadow_ray_origin, &light_dir),
         };
         if shadow_intersect.is_intersecting && shadow_intersect.distance < light_distance {
             let distance_ratio = shadow_intersect.distance / light_distance;
@@ -85,14 +60,14 @@ fn cast_shadow(
 }
 
 enum Object {
-    Cube(Cube),
+    Cube(Cube, bool),
 }
 
 pub fn cast_ray(
     ray_origin: &Vec3,
     ray_direction: &Vec3,
     objects: &[Object],
-    light: &Light,
+    yellow_light_position: &Vec3, 
     depth: u32,
 ) -> Color {
     if depth > 3 {
@@ -104,7 +79,7 @@ pub fn cast_ray(
 
     for object in objects {
         let i = match object {
-            Object::Cube(cube) => cube.ray_intersect(ray_origin, ray_direction),
+            Object::Cube(cube, _) => cube.ray_intersect(ray_origin, ray_direction),
         };
         if i.is_intersecting && i.distance < zbuffer {
             zbuffer = i.distance;
@@ -116,43 +91,28 @@ pub fn cast_ray(
         return SKYBOX_COLOR;
     }
 
-    let light_dir = (light.position - intersect.point).normalize();
+    let light_dir = (yellow_light_position - intersect.point).normalize();
     let view_dir = (ray_origin - intersect.point).normalize();
     let reflect_dir = reflect(&-light_dir, &intersect.normal).normalize();
 
-    let shadow_intensity = cast_shadow(&intersect, light, objects);
-    let light_intensity = light.intensity * (1.0 - shadow_intensity);
+    let shadow_intensity = cast_shadow(&intersect, yellow_light_position, objects);
+    let light_intensity = 1.5 * (1.0 - shadow_intensity);
 
     let diffuse_intensity = intersect.normal.dot(&light_dir).max(0.0).min(1.0);
     let diffuse = intersect.material.diffuse * intersect.material.albedo[0] * diffuse_intensity * light_intensity;
 
+
     let specular_intensity = view_dir.dot(&reflect_dir).max(0.0).powf(intersect.material.specular);
-    let specular = light.color * intersect.material.albedo[1] * specular_intensity * light_intensity;
+    let specular = Color::new(255, 255, 255) * intersect.material.albedo[1] * specular_intensity * light_intensity;
 
-    let mut reflect_color = Color::black();
-    let reflectivity = intersect.material.albedo[2];
-    if reflectivity > 0.0 {
-        let reflect_dir = reflect(&ray_direction, &intersect.normal).normalize();
-        let reflect_origin = offset_origin(&intersect, &reflect_dir);
-        reflect_color = cast_ray(&reflect_origin, &reflect_dir, objects, light, depth + 1);
-    }
-
-    let mut refract_color = Color::black();
-    let transparency = intersect.material.albedo[3];
-    if transparency > 0.0 {
-        let refract_dir = refract(&ray_direction, &intersect.normal, intersect.material.refractive_index);
-        let refract_origin = offset_origin(&intersect, &refract_dir);
-        refract_color = cast_ray(&refract_origin, &refract_dir, objects, light, depth + 1);
-    }
-
-    (diffuse + specular) * (1.0 - reflectivity - transparency) + (reflect_color * reflectivity) + (refract_color * transparency)
+    diffuse + specular
 }
 
-pub fn render(framebuffer: &mut Framebuffer, objects: &[Object], camera: &Camera, light: &Light) {
+pub fn render(framebuffer: &mut Framebuffer, objects: &[Object], camera: &Camera, yellow_light_position: &Vec3) {
     let width = framebuffer.width as f32;
     let height = framebuffer.height as f32;
     let aspect_ratio = width / height;
-    let fov = PI/3.0;
+    let fov = PI / 3.0;
     let perspective_scale = (fov * 0.5).tan();
 
     for y in 0..framebuffer.height {
@@ -166,7 +126,7 @@ pub fn render(framebuffer: &mut Framebuffer, objects: &[Object], camera: &Camera
             let ray_direction = normalize(&Vec3::new(screen_x, screen_y, -1.0));
             let rotated_direction = camera.base_change(&ray_direction);
 
-            let pixel_color = cast_ray(&camera.eye, &rotated_direction, objects, light, 0);
+            let pixel_color = cast_ray(&camera.eye, &rotated_direction, objects, yellow_light_position, 0);
 
             framebuffer.set_current_color(pixel_color.to_hex());
             framebuffer.point(x, y);
@@ -188,38 +148,33 @@ fn main() {
         window_width,
         window_height,
         WindowOptions::default(),
-    ).unwrap();
+    )
+    .unwrap();
 
     let pale_yellow = Material::new(
-        Color::new(255, 255, 153), 
+        Color::new(255, 255, 153),
         1.0,
         [0.9, 0.1, 0.0, 0.0],
         0.0,
     );
 
     let blue_cube = Material::new(
-        Color::new(0, 0, 255), 
+        Color::new(0, 0, 255),
         1.0,
         [0.9, 0.1, 0.0, 0.0],
         0.0,
     );
 
     let mut objects = [
-        Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow }), 
-        Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }),
+        Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow }, true), // Cubo amarillo (fuente de luz)
+        Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }, false), // Cubo azul
     ];
 
     let mut camera = Camera::new(
-        Vec3::new(0.0, 3.0, -3.0), 
-        Vec3::new(0.0, 3.0, 0.0),  
-        Vec3::new(0.0, 1.0, 0.0),  
+        Vec3::new(0.0, 3.0, -3.0),
+        Vec3::new(0.0, 3.0, 0.0),
+        Vec3::new(0.0, 1.0, 0.0),
     );
-
-    let light = Light {
-        position: Vec3::new(0.0, 0.0, 20.0),
-        intensity: 1.5,
-        color: Color::new(255, 255, 255),
-    };
 
     let mut angle: f32 = 0.0;
     let radius = 10.0;
@@ -227,17 +182,16 @@ fn main() {
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
         angle += rotation_speed;
-        
-        let x = radius * angle.cos();
-        let z = radius * angle.sin();
+
+        let yellow_light_position = Vec3::new(radius * angle.cos(), 10.0, radius * angle.sin());
         objects[0] = Object::Cube(Cube { 
-            center: Vec3::new(10.0, x, z),  
+            center: yellow_light_position, 
             size: 1.0, 
             material: pale_yellow 
-        });
+        }, true);
 
         if window.is_key_down(Key::Left) {
-            camera.orbit(rotation_speed, 0.0); 
+            camera.orbit(rotation_speed, 0.0);
         }
 
         if window.is_key_down(Key::Right) {
@@ -252,9 +206,11 @@ fn main() {
             camera.orbit(0.0, rotation_speed);
         }
 
-        render(&mut framebuffer, &objects, &camera, &light);
+        render(&mut framebuffer, &objects, &camera, &yellow_light_position);
 
-        window.update_with_buffer(&framebuffer.buffer, framebuffer.width, framebuffer.height).unwrap();
+        window
+            .update_with_buffer(&framebuffer.buffer, framebuffer.width, framebuffer.height)
+            .unwrap();
         std::thread::sleep(frame_delay);
     }
 }
