@@ -204,7 +204,7 @@ fn main() {
         0.0,
     );
 
-    let objects = [
+    let mut objects = [
         Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow }), 
         Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }),
     ];
@@ -221,9 +221,21 @@ fn main() {
         color: Color::new(255, 255, 255),
     };
 
+    let mut angle: f32 = 0.0;
+    let radius = 10.0;
     let rotation_speed = 0.1;
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
+        angle += rotation_speed;
+        
+        let x = radius * angle.cos();
+        let z = radius * angle.sin();
+        objects[0] = Object::Cube(Cube { 
+            center: Vec3::new(x, 10.0, z),  
+            size: 1.0, 
+            material: pale_yellow 
+        });
+
         if window.is_key_down(Key::Left) {
             camera.orbit(rotation_speed, 0.0); 
         }
