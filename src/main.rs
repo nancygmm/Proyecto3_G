@@ -178,7 +178,7 @@ fn main() {
 
     let mut angle: f32 = 0.0;
     let radius = 10.0;
-    let rotation_speed = 0.1;
+    let rotation_speed = 0.05; 
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
         angle += rotation_speed;
