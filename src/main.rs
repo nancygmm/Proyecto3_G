@@ -166,8 +166,43 @@ fn main() {
     );
 
     let mut objects = [
-        Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow }, true), // Cubo amarillo (fuente de luz)
-        Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }, false), // Cubo azul
+        Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow }, true), //Sol
+        Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(0.0, 4.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(0.0, 5.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 9.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 9.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        
     ];
 
     let mut camera = Camera::new(
@@ -177,13 +212,13 @@ fn main() {
     );
 
     let mut angle: f32 = 0.0;
-    let radius = 10.0;
+    let radius = 15.0;
     let rotation_speed = 0.05; 
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
         angle += rotation_speed;
 
-        let yellow_light_position = Vec3::new(radius * angle.cos(), 10.0, radius * angle.sin());
+        let yellow_light_position = Vec3::new(radius * angle.cos(), 15.0, radius * angle.sin());
         objects[0] = Object::Cube(Cube { 
             center: yellow_light_position, 
             size: 1.0, 
