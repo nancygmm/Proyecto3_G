@@ -1,11 +1,11 @@
-
 use nalgebra_glm::Vec3;
 use std::f32::consts::PI;
 
 pub struct Camera {
     pub eye: Vec3,
     pub center: Vec3,
-    pub up: Vec3
+    pub up: Vec3,
+    pub speed: f32, 
 }
 
 impl Camera {
@@ -13,7 +13,8 @@ impl Camera {
         Camera {
             eye,
             center,
-            up
+            up,
+            speed: 0.1, 
         }
     }
 
@@ -24,9 +25,10 @@ impl Camera {
 
         let rotated = vector.x * right + vector.y * up - vector.z * forward;
 
-        return rotated.normalize();
+        rotated.normalize()
     }
 
+    // Método para rotar la cámara (mantiene la funcionalidad original)
     pub fn orbit(&mut self, delta_yaw: f32, delta_pitch: f32) {
         let radius_vector = self.eye - self.center;
         let radius = radius_vector.magnitude();
@@ -45,5 +47,30 @@ impl Camera {
         );
 
         self.eye = new_eye;
+    }
+
+    pub fn move_camera(&mut self, direction: &str) {
+        let forward = (self.center - self.eye).normalize();
+        let right = forward.cross(&self.up).normalize();
+
+        match direction {
+            "forward" => {
+                self.eye += forward * self.speed;
+                self.center += forward * self.speed;
+            },
+            "backward" => {
+                self.eye -= forward * self.speed;
+                self.center -= forward * self.speed;
+            },
+            "left" => {
+                self.eye -= right * self.speed;
+                self.center -= right * self.speed;
+            },
+            "right" => {
+                self.eye += right * self.speed;
+                self.center += right * self.speed;
+            },
+            _ => {}
+        }
     }
 }
