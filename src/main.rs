@@ -244,9 +244,9 @@ fn main() {
     ];
 
     let mut camera = Camera::new(
-        Vec3::new(0.0, 3.0, -5.0), 
+        Vec3::new(0.0, 5.0, 7.0), 
+        Vec3::new(0.0, 5.0, 0.0),  
         Vec3::new(0.0, 3.0, 0.0),  
-        Vec3::new(0.0, 1.0, 0.0),  
     );
 
     let mut angle: f32 = 0.0;
@@ -254,53 +254,54 @@ fn main() {
     let rotation_speed = 0.05;
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
-        angle += rotation_speed;
-
-        let yellow_light_position = Vec3::new(radius * angle.cos(), 15.0, radius * angle.sin());
+        angle += rotation_speed; 
+    
+        let yellow_light_position = Vec3::new(radius * angle.cos(), radius * angle.sin(), 0.0);
         objects[0] = Object::Cube(Cube { 
             center: yellow_light_position, 
             size: 1.0, 
             material: pale_yellow 
         }, true);
-
+    
         if window.is_key_down(Key::W) {
             camera.move_camera("forward"); 
         }
-
+    
         if window.is_key_down(Key::S) {
             camera.move_camera("backward");
         }
-
+    
         if window.is_key_down(Key::A) {
             camera.move_camera("left"); 
         }
-
+    
         if window.is_key_down(Key::D) {
             camera.move_camera("right"); 
         }
-
+    
         if window.is_key_down(Key::Left) {
             camera.orbit(rotation_speed, 0.0); 
         }
-
+    
         if window.is_key_down(Key::Right) {
             camera.orbit(-rotation_speed, 0.0); 
         }
-
+    
         if window.is_key_down(Key::Up) {
             camera.orbit(0.0, -rotation_speed); 
         }
-
+    
         if window.is_key_down(Key::Down) {
             camera.orbit(0.0, rotation_speed); 
         }
-
+    
         render(&mut framebuffer, &objects, &camera, &yellow_light_position);
-
+    
         window
             .update_with_buffer(&framebuffer.buffer, framebuffer.width, framebuffer.height)
             .unwrap();
-
+    
         std::thread::sleep(frame_delay);
     }
+    
 }

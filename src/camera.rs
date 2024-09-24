@@ -28,7 +28,6 @@ impl Camera {
         rotated.normalize()
     }
 
-    // Método para rotar la cámara (mantiene la funcionalidad original)
     pub fn orbit(&mut self, delta_yaw: f32, delta_pitch: f32) {
         let radius_vector = self.eye - self.center;
         let radius = radius_vector.magnitude();
