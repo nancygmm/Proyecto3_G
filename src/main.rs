@@ -159,15 +159,22 @@ fn main() {
     )
     .unwrap();
 
-    let pale_yellow = Material::new(
-        Color::new(255, 255, 0), 
+    let green_material = Material::new(
+        Color::new(34, 139, 34), 
         1.0,
         [0.9, 0.1, 0.0, 0.0],
         0.0,
     );
-
-    let blue_cube = Material::new(
-        Color::new(0, 0, 255),
+    
+    let brown_material = Material::new(
+        Color::new(139, 69, 19), 
+        1.0,
+        [0.9, 0.1, 0.0, 0.0],
+        0.0,
+    );
+    
+    let pale_yellow = Material::new(
+        Color::new(255, 255, 0), 
         1.0,
         [0.9, 0.1, 0.0, 0.0],
         0.0,
@@ -176,138 +183,138 @@ fn main() {
     let mut objects = [
         Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow }, true), //Sol
 
-        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 0.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 0.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 0.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, -1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, -1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, -1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 1.0), size: 1.0, material: blue_cube }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra
 
-        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 0.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 0.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, -2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, -2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, -2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, -1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, -1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, -2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, -2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 2.0), size: 1.0, material: blue_cube }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra
 
-        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 0.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 0.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, -3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, -3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, -3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, -2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, -2.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, -3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, -3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, -3.0), size: 1.0, material: blue_cube }, false), //Tierra-
-        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, -1.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, -3.0), size: 1.0, material: blue_cube }, false), //Tierra
-        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, -1.0), size: 1.0, material: blue_cube }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(0.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(2.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-2.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(1.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra-
+        Object::Cube(Cube { center: Vec3::new(3.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-1.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(-3.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra
         
 
-        Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
-        Object::Cube(Cube { center: Vec3::new(0.0, 4.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
-        Object::Cube(Cube { center: Vec3::new(0.0, 5.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(0.0, 3.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(0.0, 4.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(0.0, 5.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
 
 
-        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
-        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
 
-        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 6.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
 
-        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-
-
-        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
-        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-
-        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-
-        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, -2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 2.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 6.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 6.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
 
 
-        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
-        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+
+        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 7.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
+
+        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(2.0, 7.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-2.0, 7.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, -2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 7.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 7.0, 2.0), size: 1.0, material: green_material }, false), //Hoja
 
 
-        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, 0.0), size: 1.0, material: blue_cube }, false), //Tronco
-        Object::Cube(Cube { center: Vec3::new(1.0, 9.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(-1.0, 9.0, 0.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, 1.0), size: 1.0, material: blue_cube }, false), //Hoja
-        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, -1.0), size: 1.0, material: blue_cube }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 8.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(1.0, 8.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 8.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+
+
+        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
+        Object::Cube(Cube { center: Vec3::new(1.0, 9.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(-1.0, 9.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 9.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
     ];
 
     let mut camera = Camera::new(
