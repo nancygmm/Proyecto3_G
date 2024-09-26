@@ -1,4 +1,3 @@
-
 use nalgebra_glm::Vec3;
 use crate::material::Material;
 

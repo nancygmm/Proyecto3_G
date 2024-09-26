@@ -463,6 +463,8 @@ fn main() {
         Object::Cube(Cube { center: Vec3::new(-1.0, 9.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
         Object::Cube(Cube { center: Vec3::new(0.0, 9.0, 1.0), size: 1.0, material: green_material }, false), //Hoja
         Object::Cube(Cube { center: Vec3::new(0.0, 9.0, -1.0), size: 1.0, material: green_material }, false), //Hoja
+        Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
+
     ];
 
     let mut camera = Camera::new(

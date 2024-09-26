@@ -1,4 +1,3 @@
-
 use crate::color::Color;
 
 #[derive(Debug, Clone, Copy)]
