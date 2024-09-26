@@ -235,15 +235,14 @@ fn main() {
         Object::Cube(Cube { center: Vec3::new(5.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra2
 
 
-        Object::Cube(Cube { center: Vec3::new(6.0, 2.0, -4.0), size: 1.0, material: green_material }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra2
         Object::Cube(Cube { center: Vec3::new(6.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Tierra2
         Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Tierra2
+        
+        
         Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Tierra2
         Object::Cube(Cube { center: Vec3::new(6.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 2.0, 4.0), size: 1.0, material: green_material }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Tierra2
 
 
         Object::Cube(Cube { center: Vec3::new(3.0, 2.0, -1.0), size: 1.0, material: blue_material }, false), //Lago
@@ -253,25 +252,55 @@ fn main() {
 
         Object::Cube(Cube { center: Vec3::new(4.0, 2.0, -2.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(5.0, 2.0, -2.0), size: 1.0, material: blue_material }, false), //Lago
+        
         Object::Cube(Cube { center: Vec3::new(6.0, 2.0, -2.0), size: 1.0, material: blue_material }, false), //Lago
+        
         Object::Cube(Cube { center: Vec3::new(4.0, 2.0, -1.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(5.0, 2.0, -1.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(6.0, 2.0, -1.0), size: 1.0, material: blue_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -1.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(4.0, 2.0, 0.0), size: 1.0, material: blue_material }, false), //Lago 
         Object::Cube(Cube { center: Vec3::new(5.0, 2.0, 0.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(6.0, 2.0, 0.0), size: 1.0, material: blue_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 0.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(4.0, 2.0, 1.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(5.0, 2.0, 1.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(6.0, 2.0, 1.0), size: 1.0, material: blue_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 1.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(4.0, 2.0, 2.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(5.0, 2.0, 2.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(6.0, 2.0, 2.0), size: 1.0, material: blue_material }, false), //Lago
 
 
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -1.0), size: 1.0, material: blue_material }, false), //Lago
         Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 0.0), size: 1.0, material: blue_material }, false), //Lago
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 1.0), size: 1.0, material: blue_material }, false), //Lago
-   
+
+
+        Object::Cube(Cube { center: Vec3::new(8.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 2.0, -1.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 2.0, 0.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 2.0, 1.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -3.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 3.0), size: 1.0, material: green_material }, false), //Lago
+
+
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -3.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -1.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 0.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 1.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 3.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -3.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -2.0), size: 1.0, material: green_material }, false), //Lago
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 3.0), size: 1.0, material: green_material }, false), //Lago
+        
+
 
         Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 0.0), size: 1.0, material: green_material }, false), //Tierra2
         Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 0.0), size: 1.0, material: green_material }, false), //Tierra2
