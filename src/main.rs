@@ -19,7 +19,8 @@ use crate::camera::Camera;
 use crate::material::Material;
 
 const ORIGIN_BIAS: f32 = 1e-4;
-const SKYBOX_COLOR: Color = Color::new(68, 142, 228);
+const DAY_SKY_COLOR: Color = Color::new(68, 142, 228); 
+const NIGHT_SKY_COLOR: Color = Color::new(10, 10, 30);  
 
 fn offset_origin(intersect: &Intersect, direction: &Vec3) -> Vec3 {
     let offset = intersect.normal * ORIGIN_BIAS;
@@ -63,6 +64,14 @@ enum Object {
     Cube(Cube, bool),
 }
 
+fn adjust_sky_color(sun_position: &Vec3) -> Color {
+    if sun_position.y > 0.0 {
+        DAY_SKY_COLOR 
+    } else {
+        NIGHT_SKY_COLOR 
+    }
+}
+
 pub fn cast_ray(
     ray_origin: &Vec3,
     ray_direction: &Vec3,
@@ -71,7 +80,7 @@ pub fn cast_ray(
     depth: u32,
 ) -> Color {
     if depth > 3 {
-        return SKYBOX_COLOR;
+        return adjust_sky_color(yellow_light_position);
     }
 
     let mut intersect = Intersect::empty();
@@ -88,7 +97,7 @@ pub fn cast_ray(
     }
 
     if !intersect.is_intersecting {
-        return SKYBOX_COLOR;
+        return adjust_sky_color(yellow_light_position); 
     }
 
     let light_dir = (yellow_light_position - intersect.point).normalize();
@@ -100,7 +109,6 @@ pub fn cast_ray(
 
     let diffuse_intensity = intersect.normal.dot(&light_dir).max(0.0).min(1.0);
     let diffuse = intersect.material.diffuse * intersect.material.albedo[0] * diffuse_intensity * light_intensity;
-
 
     let specular_intensity = view_dir.dot(&reflect_dir).max(0.0).powf(intersect.material.specular);
     let specular = Color::new(255, 255, 255) * intersect.material.albedo[1] * specular_intensity * light_intensity;
@@ -152,7 +160,7 @@ fn main() {
     .unwrap();
 
     let pale_yellow = Material::new(
-        Color::new(255, 255, 153),
+        Color::new(255, 255, 0), 
         1.0,
         [0.9, 0.1, 0.0, 0.0],
         0.0,
@@ -353,14 +361,13 @@ fn main() {
         if window.is_key_down(Key::Down) {
             camera.orbit(0.0, rotation_speed); 
         }
-    
+
         render(&mut framebuffer, &objects, &camera, &yellow_light_position);
-    
+
         window
             .update_with_buffer(&framebuffer.buffer, framebuffer.width, framebuffer.height)
             .unwrap();
-    
+
         std::thread::sleep(frame_delay);
     }
-    
 }
