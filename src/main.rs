@@ -390,6 +390,9 @@ fn main() {
         Object::Cube(Cube { center: Vec3::new(0.0, 5.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
 
 
+        Object::Cube(Cube { center: Vec3::new(1.0, 5.0, 0.0), size: 1.0, material: brown_material }, false), //Hive
+
+
         Object::Cube(Cube { center: Vec3::new(0.0, 6.0, 0.0), size: 1.0, material: brown_material }, false), //Tronco
         Object::Cube(Cube { center: Vec3::new(1.0, 6.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
         Object::Cube(Cube { center: Vec3::new(-1.0, 6.0, 0.0), size: 1.0, material: green_material }, false), //Hoja
