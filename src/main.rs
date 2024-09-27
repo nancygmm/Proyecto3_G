@@ -174,6 +174,7 @@ fn main() {
     let sun_texture = Rc::new(Texture::new("src/SunMoon.png"));
     let water_texture = Rc::new(Texture::new("src/Water.png"));
     let hive_texture = Rc::new(Texture::new("src/Hive.png"));
+    let stone_texture = Rc::new(Texture::new("src/Stone.png"));
 
 
 
@@ -234,6 +235,14 @@ fn main() {
         Some(hive_texture.clone())
     );
 
+    let stone_material = Material::new(
+        Color::black(), 
+        1.0,
+        [0.9, 0.1, 0.0, 0.0],
+        0.0,
+        Some(stone_texture.clone())
+    );
+
     let mut objects = [
 
         Object::Cube(Cube { center: Vec3::new(0.0, 10.0, 0.0), size: 1.0, material: pale_yellow.clone() }, true), //Sol
@@ -263,111 +272,113 @@ fn main() {
         Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 0.0), size: 1.0, material: water_material.clone() }, false), //Lago
 
 
-        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2 
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 2.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(5.0, 2.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(4.0, 2.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(5.0, 2.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 2.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(6.0, 2.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 0.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, -2.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, -3.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
-        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, -1.0), size: 1.0, material: leaves_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(4.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(5.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(6.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2 
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        
+        Object::Cube(Cube { center: Vec3::new(4.0, 2.0, 3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(5.0, 2.0, 3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(4.0, 2.0, -3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(5.0, 2.0, -3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(6.0, 2.0, -3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, -2.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 2.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(6.0, 2.0, 3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        Object::Cube(Cube { center: Vec3::new(7.0, 2.0, 3.0), size: 1.0, material: grass_material.clone() }, false), //Tierra
+        
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(8.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(7.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 0.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(0.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, -2.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(2.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-2.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, 1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(1.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(3.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, 3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-1.0, 1.0, -3.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
+        Object::Cube(Cube { center: Vec3::new(-3.0, 1.0, -1.0), size: 1.0, material: stone_material.clone() }, false), //Tierra2
 
 
         Object::Cube(Cube { center: Vec3::new(1.0, 2.0, 0.0), size: 1.0, material: dirt_material.clone() }, false), //Tierra
